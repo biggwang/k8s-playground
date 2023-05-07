@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myweb-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ryudb
+  template:
+    metadata:
+      labels:
+        app: ryudb
+    spec:
+      containers:
+        - image: docker.io/mysql
+          imagePullPolicy: Never  #Do not use remote mirror
+          name: ryudb
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "1234"

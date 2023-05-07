@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biggwang-deployment
+  labels:
+    app: biggwang-boot
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: biggwang-boot
+  template:
+    metadata:
+      labels:
+        app: biggwang-boot
+    spec:
+      containers:
+        - name: biggwang-boot
+          image: boriswinter/biggwang-boot:6.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
